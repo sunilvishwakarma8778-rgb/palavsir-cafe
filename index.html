@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Menu</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#17171a;--card:#222226;--line:#34343a;--y:#ffb703;--t:#f4f4f4;--m:#a9a9b2;--v:#4cc46a;--x:#ff5a4d}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--t);font-family:Poppins,system-ui,sans-serif;padding-bottom:96px}
+button,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--y);outline-offset:2px}
+header{background:var(--y);color:#111;padding:22px 16px 18px;text-align:center}
+header h1{font-family:Anton,sans-serif;font-weight:400;font-size:44px;line-height:1;margin:0;letter-spacing:1px}
+header p{margin:6px 0 0;font-size:13px;font-weight:500}
+.bar{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 12px 0;border-bottom:1px solid var(--line)}
+.row{display:flex;gap:8px}
+#q{flex:1;min-width:0;padding:11px 14px;border-radius:10px;border:1px solid var(--line);background:var(--card);font-size:15px}
+.f{padding:0 12px;border-radius:10px;border:1px solid var(--line);background:var(--card);font-size:13px;display:flex;align-items:center;gap:6px}
+.f[aria-pressed=true]{border-color:var(--y);background:#2c2616}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:10px 0;scrollbar-width:none}
+.tabs a{flex:none;padding:7px 14px;border-radius:8px;font-size:13px;font-weight:500;color:var(--t);text-decoration:none;background:var(--card)}
+.tabs a.on{background:var(--y);color:#111}
+main{max-width:640px;margin:0 auto;padding:0 14px}
+section{scroll-margin-top:130px}
+h2{display:inline-block;background:var(--y);color:#111;font-family:Anton,sans-serif;font-weight:400;font-size:24px;padding:3px 12px 1px;margin:26px 0 10px;text-transform:uppercase;letter-spacing:1px}
+.it{display:flex;gap:10px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.it.off{opacity:.45}
+.d{flex:none;width:14px;height:14px;border:1.5px solid;border-radius:3px;position:relative}
+.d:after{content:"";position:absolute;inset:2.5px;border-radius:50%;background:currentColor}
+.v{color:var(--v)}.x{color:var(--x)}
+.nm{flex:1;font-size:15px;line-height:1.35}
+.nm small{display:block;color:var(--m);font-size:12px}
+.vs{display:flex;flex-direction:column;gap:6px;align-items:flex-end}
+.vr{display:flex;align-items:center;gap:8px}
+.pr{font-weight:600;color:var(--y);font-size:14px;white-space:nowrap}
+.pr i{font-style:normal;font-weight:400;color:var(--m);font-size:12px;margin-right:4px}
+.add{padding:6px 16px;border-radius:8px;border:1.5px solid var(--y);background:none;color:var(--y);font-weight:600;font-size:13px}
+.st{display:flex;align-items:center;background:var(--y);color:#111;border-radius:8px}
+.st button{width:32px;height:32px;border:0;background:none;font-size:18px;font-weight:600;color:#111}
+.st b{min-width:20px;text-align:center;font-size:14px}
+.empty{text-align:center;color:var(--m);padding:40px 0}
+#bar{position:fixed;left:0;right:0;bottom:0;z-index:6;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:var(--bg);border-top:1px solid var(--line)}
+#bar button{width:100%;max-width:640px;margin:0 auto;display:flex;justify-content:space-between;padding:14px 18px;border:0;border-radius:12px;background:var(--y);color:#111;font-weight:600;font-size:15px}
+#sheet{position:fixed;inset:0;z-index:10;background:rgba(0,0,0,.7);display:flex;align-items:flex-end;justify-content:center}
+#sheet[hidden]{display:none}
+.pn{width:100%;max-width:640px;max-height:92vh;overflow:auto;background:var(--bg);border-radius:18px 18px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom))}
+.pn h3{font-family:Anton,sans-serif;font-weight:400;font-size:26px;margin:0 0 6px;color:var(--y)}
+.cl{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
+.cl span{flex:1}
+.lbl{display:block;margin:14px 0 6px;font-size:13px;color:var(--m)}
+.pn input,.pn textarea{width:100%;padding:11px 12px;border-radius:10px;border:1px solid var(--line);background:var(--card);font-size:15px}
+.tot{display:flex;justify-content:space-between;font-weight:600;font-size:17px;margin:16px 0 4px}
+.err{color:var(--x);font-size:13px;min-height:18px;margin:4px 0}
+.send{width:100%;padding:14px;border:0;border-radius:12px;background:#25d366;color:#08210f;font-weight:600;font-size:16px}
+.send:disabled{opacity:.4}
+.sub{display:flex;gap:10px;margin-top:10px}
+.sub button{flex:1;padding:11px;border-radius:10px;border:1px solid var(--line);background:none;font-size:14px}
+.hint{font-size:12px;color:var(--m);margin:10px 0 0}
+</style>
+</head>
+<body>
+<header><h1 id="cafe"></h1><p>Order karne ke liye item chuno</p></header>
+<div class="bar">
+  <div class="row">
+    <input id="q" type="search" placeholder="Search: momo, pizza, chai..." aria-label="Search menu">
+    <button class="f" data-m="v" aria-pressed="false"><span class="d v"></span>Veg</button>
+    <button class="f" data-m="x" aria-pressed="false"><span class="d x"></span>Non-Veg</button>
+  </div>
+  <nav class="tabs" id="tabs" aria-label="Categories"></nav>
+</div>
+<main id="menu"></main>
+<div id="bar" hidden><button id="open" type="button"><span id="cnt"></span><span id="amt"></span></button></div>
+<div id="sheet" hidden>
+  <div class="pn" role="dialog" aria-modal="true" aria-label="Aapka order">
+    <h3>Aapka order</h3>
+    <div id="lines"></div>
+    <label class="lbl" for="tbl">Table number *</label>
+    <input id="tbl" inputmode="numeric" placeholder="Jaise 5">
+    <label class="lbl" for="note">Special instruction (optional)</label>
+    <textarea id="note" rows="2" placeholder="Jaise: kam teekha, bina pyaaz"></textarea>
+    <div class="tot"><span>Total</span><span id="tot"></span></div>
+    <div class="err" id="err" role="alert"></div>
+    <button class="send" id="send" type="button">WhatsApp par order bhejo</button>
+    <p class="hint">WhatsApp khulne par <b>Send</b> dabana zaroori hai, tabhi order cafe tak pahunchega. Paisa counter par dena hai.</p>
+    <div class="sub"><button id="clear" type="button">Cart saaf karo</button><button id="close" type="button">Back menu</button></div>
+  </div>
+</div>
+
+<script>
+// ===== Yahan badlo =====
+const CAFE_NAME = 'Your Cafe Name';
+const WHATSAPP  = '918755653193';   // country code ke saath
+
+// Menu format: Naam|v (veg) ya x (non-veg)|price
+// Do rate: 4 pcs:70,8 pcs:130  |  Rate poochna ho: rate  |  Aaj available nahi: aakhir me |0 jodo
+const RAW = {
+'Tiffin':`Maggie|v|35
+Masala Maggie|v|50
+Egg Maggie|x|60
+Cheese Maggie|v|70
+Butter Toast|v|35
+Egg Toast|x|35
+Egg Chowmein|x|90
+Chicken Chowmein|x|120
+Egg Chicken Chowmein|x|165`,
+'Pizza':`Sweet Corn Cheese Pizza|v|130
+Farm Villa Pizza|v|130
+Margarita Pizza|v|140
+Onion Paneer Pizza|v|140
+Capsicum Paneer Red Paprika Pizza|v|140
+Chicken Pizza|x|170`,
+'Rice':`Veg Biryani|v|60
+Egg Biryani|x|70
+Chicken Biryani|x|100
+Egg Chicken Biryani|x|120
+Fried Rice + Paneer Butter Masala (combo)|v|140
+Fried Rice + Chicken Kosha (combo)|x|140
+Pulao + Paneer Butter Masala (combo)|v|170
+Pulao + Chicken Kosha (combo)|x|170`,
+'Burger & Snacks':`Chicken Burger|x|90
+Paneer Burger|v|80
+Veg Burger|v|70
+Chicken Cheese Burger|x|130
+Paneer Cheese Burger|v|110
+Veg Cheese Burger|v|100
+French Fry|v|50
+Peri Peri French Fry|v|60
+Honey Chilli Potato|v|100
+Chilli Garlic Potato Shotz|v|70
+Veggie Finger|v|90`,
+'Momo':`Veg Steam Momo|v|5 pcs:45,8 pcs:70
+Veg Fried Momo|v|5 pcs:60,8 pcs:85
+Veg Crispy Momo|v|5 pcs:75,8 pcs:100
+Veg Pan Fried Momo|v|5 pcs:85,8 pcs:130
+Chicken Steam Momo|x|5 pcs:60,8 pcs:85
+Chicken Fried Momo|x|5 pcs:70,8 pcs:115
+Chicken Crispy Momo|x|5 pcs:80,8 pcs:130
+Chicken Pan Fried Momo|x|5 pcs:100,8 pcs:145
+Prawn Steam Momo|x|5 pcs:100,8 pcs:145
+Bhetki Fish Steam Momo|x|5 pcs:100,8 pcs:145`,
+'Fish':`Pomfret Fry|x|rate
+Fish Fry|x|120
+Fish Finger (4 pcs)|x|120
+Prawn Balls (4 pcs)|x|100
+Prawn Popcorn (10 pcs)|x|110
+Fish Ball (4 pcs)|x|100
+Bhetki Popcorn (8 pcs)|x|120`,
+'Chicken':`Chicken Cheese Finger (4 pcs)|x|145
+Chicken Cheese Ball (4 pcs)|x|85
+Chicken Lollipop (4 pcs)|x|145
+Chicken Popcorn (8 pcs)|x|130
+Chicken Strips (2 pcs)|x|120
+Chicken Wing (4 pcs)|x|170
+Crispy Chicken Fry (4 pcs)|x|180
+Chicken Leg Fry|x|95
+Chicken Cutlet|x|95
+Chicken Cheese Polo|x|150
+Chicken Pakora|x|4 pcs:70,8 pcs:130
+Honey Garlic Chicken Wing (4 pcs)|x|225
+Pan Fried Chicken|x|4 pcs:110,8 pcs:180
+Chicken Cheese Spring Roll|x|2 pcs:95,4 pcs:180
+Egg Chilli Fry|x|75`,
+'Gravy':`Paneer Butter Masala|v|4 pcs:170,8 pcs:325
+Veg Manchurian|v|4 pcs:170,8 pcs:110
+Chicken Kosha|x|4 pcs:155,8 pcs:285
+Chana Masala|v|50`,
+'Beverages':`Mango Juice|v|65
+Musambi Juice|v|65
+Watermelon Juice|v|65
+Pineapple Juice|v|65
+Orange Juice|v|65
+Pomegranate Juice|v|65
+Lassi|v|50
+Rose Lassi|v|55
+Cold Coffee|v|90
+Hot Coffee|v|40
+Black Coffee|v|30
+Milk Tea|v|25
+Spl. Milk Tea|v|30
+Lemon Tea|v|20`,
+'Nashta':`Banarasi Kachori|v|15
+Doni Paratha|v|20
+Alu Paratha|v|40
+Paneer Paratha|v|75
+Malabar Paratha|v|20
+Khasta Sattu Kachori|v|15
+Alu Thacha Samosa|v|15
+Alu Onion Samosa|v|10
+Dal Makhni|v|50`,
+'Sandwich':`Corn Cheese Grilled|v|90
+Veg Cheese Grilled|v|80
+Chicken Cheese Grilled|x|120
+Egg Cheese Grilled|x|70
+Egg Sandwich|x|60
+Egg Curd Sandwich|x|50`,
+'Soup':`Egg Sweet Corn Soup|x|50
+Veg Soup|v|40
+Tomato Soup|v|40
+Chicken Soup|x|60`,
+'Cold Drinks':`Masala Cold Drinks|v|50
+Thums Up|v|40
+Sprite|v|40
+Fanta|v|40`,
+'Ice Cream':`Vanilla Ice Cream|v|45
+Chocolate Ice Cream|v|45
+Butter Scotch Ice Cream|v|45`
+};
+// ===== Yahan se neeche code hai =====
+
+const MENU = Object.entries(RAW).map(([n, t]) => ({
+  n, id: 's-' + n.toLowerCase().replace(/\W+/g, '-'),
+  items: t.split('\n').map(l => {
+    const [name, k, p, off] = l.split('|');
+    const vs = p === 'rate' ? [{ l: '', p: 0 }]
+      : p.includes(':') ? p.split(',').map(s => { const [lb, x] = s.split(':'); return { l: lb, p: +x }; })
+      : [{ l: '', p: +p }];
+    return { name, k, vs, off: off === '0' };
+  })
+}));
+
+const $ = id => document.getElementById(id);
+let cart = {}, filter = { q: '', m: '' };
+try { cart = JSON.parse(localStorage.getItem('cart') || '{}'); $('tbl').value = localStorage.getItem('tbl') || ''; } catch (e) {}
+const save = () => { try { localStorage.setItem('cart', JSON.stringify(cart)); localStorage.setItem('tbl', $('tbl').value); } catch (e) {} };
+const key = (n, l) => n + '|' + l;
+const rs = p => p ? '₹' + p : 'As per rate';
+const lines = () => Object.values(cart).filter(c => c.q > 0);
+
+function change(k, info, d) {
+  const c = cart[k] || (cart[k] = { ...info, q: 0 });
+  c.q = Math.max(0, c.q + d);
+  if (!c.q) delete cart[k];
+  save(); drawMenu(); drawBar(); if (!$('sheet').hidden) drawSheet();
+}
+
+function ctl(k, q, attrs) {
+  return q
+    ? `<div class="st"><button type="button" aria-label="Kam karo" ${attrs} data-d="-1">−</button><b>${q}</b><button type="button" aria-label="Badhao" ${attrs} data-d="1">+</button></div>`
+    : `<button type="button" class="add" ${attrs} data-d="1">ADD</button>`;
+}
+
+function drawMenu() {
+  const q = filter.q.toLowerCase(), box = $('menu');
+  let html = '';
+  MENU.forEach((s, si) => {
+    const rows = s.items.map((it, ii) => ({ it, ii }))
+      .filter(({ it }) => it.name.toLowerCase().includes(q) && (!filter.m || it.k === filter.m));
+    if (!rows.length) return;
+    html += `<section id="${s.id}"><h2>${s.n}</h2>`;
+    rows.forEach(({ it, ii }) => {
+      html += `<div class="it${it.off ? ' off' : ''}"><span class="d ${it.k}" role="img" aria-label="${it.k === 'v' ? 'Veg' : 'Non-veg'}"></span><div class="nm">${it.name}${it.off ? '<small>Aaj available nahi</small>' : ''}</div>`;
+      if (!it.off) {
+        html += '<div class="vs">';
+        it.vs.forEach((v, vi) => {
+          const q2 = (cart[key(it.name, v.l)] || {}).q || 0;
+          html += `<div class="vr"><span class="pr">${v.l ? '<i>' + v.l + '</i>' : ''}${rs(v.p)}</span>${ctl('', q2, `data-s="${si}" data-i="${ii}" data-v="${vi}"`)}</div>`;
+        });
+        html += '</div>';
+      }
+      html += '</div>';
+    });
+    html += '</section>';
+  });
+  box.innerHTML = html || '<p class="empty">Kuch nahi mila. Doosra naam try karo.</p>';
+}
+
+function totals() {
+  let n = 0, t = 0, rate = false;
+  lines().forEach(c => { n += c.q; t += c.p * c.q; if (!c.p) rate = true; });
+  return { n, t, rate };
+}
+
+function drawBar() {
+  const { n, t, rate } = totals();
+  $('bar').hidden = !n;
+  $('cnt').textContent = n + (n === 1 ? ' item' : ' items');
+  $('amt').textContent = 'Order dekho  •  ₹' + t + (rate ? ' +' : '');
+}
+
+function drawSheet() {
+  const { t, rate } = totals();
+  $('lines').innerHTML = lines().map(c => {
+    const k = key(c.name, c.l);
+    return `<div class="cl"><span>${c.name}${c.l ? ' (' + c.l + ')' : ''}<br><small style="color:var(--m)">${rs(c.p)}</small></span><div class="st"><button type="button" aria-label="Kam karo" data-k="${k}" data-d="-1">−</button><b>${c.q}</b><button type="button" aria-label="Badhao" data-k="${k}" data-d="1">+</button></div></div>`;
+  }).join('') || '<p class="empty">Cart khali hai.</p>';
+  $('tot').textContent = '₹' + t + (rate ? ' + as per rate' : '');
+  $('send').disabled = !lines().length;
+}
+
+function send() {
+  const table = $('tbl').value.trim();
+  if (!table) { $('err').textContent = 'Table number daalo.'; $('tbl').focus(); return; }
+  $('err').textContent = '';
+  const { t, rate } = totals();
+  const body = lines().map((c, i) => `${i + 1}. ${c.name}${c.l ? ' (' + c.l + ')' : ''} x ${c.q} = ${c.p ? '₹' + c.p * c.q : 'rate poochna'}`).join('\n');
+  const note = $('note').value.trim();
+  const msg = `*Naya Order*\nTable: ${table}\n\n${body}\n\n*Total: ₹${t}*${rate ? ' (+ as per rate items)' : ''}${note ? '\n\nNote: ' + note : ''}`;
+  save();
+  location.href = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(msg);
+}
+
+// events
+$('cafe').textContent = CAFE_NAME;
+document.title = CAFE_NAME + ' - Menu';
+$('tabs').innerHTML = MENU.map(s => `<a href="#${s.id}">${s.n}</a>`).join('');
+$('q').addEventListener('input', e => { filter.q = e.target.value.trim(); drawMenu(); });
+document.querySelectorAll('.f').forEach(b => b.addEventListener('click', () => {
+  const on = b.getAttribute('aria-pressed') === 'true';
+  document.querySelectorAll('.f').forEach(x => x.setAttribute('aria-pressed', 'false'));
+  filter.m = on ? '' : b.dataset.m;
+  if (!on) b.setAttribute('aria-pressed', 'true');
+  drawMenu();
+}));
+$('menu').addEventListener('click', e => {
+  const b = e.target.closest('button[data-s]'); if (!b) return;
+  const it = MENU[+b.dataset.s].items[+b.dataset.i], v = it.vs[+b.dataset.v];
+  change(key(it.name, v.l), { name: it.name, l: v.l, p: v.p }, +b.dataset.d);
+});
+$('lines').addEventListener('click', e => {
+  const b = e.target.closest('button[data-k]'); if (!b) return;
+  change(b.dataset.k, null, +b.dataset.d);
+});
+$('open').onclick = () => { drawSheet(); $('sheet').hidden = false; };
+$('close').onclick = () => { $('sheet').hidden = true; };
+$('sheet').addEventListener('click', e => { if (e.target === $('sheet')) $('sheet').hidden = true; });
+$('clear').onclick = () => { cart = {}; save(); drawMenu(); drawBar(); $('sheet').hidden = true; };
+$('tbl').addEventListener('input', save);
+$('send').onclick = send;
+document.addEventListener('keydown', e => { if (e.key === 'Escape') $('sheet').hidden = true; });
+window.addEventListener('scroll', () => {
+  let cur = null;
+  document.querySelectorAll('section').forEach(s => { if (s.getBoundingClientRect().top < 150) cur = s.id; });
+  document.querySelectorAll('.tabs a').forEach(a => {
+    const on = a.getAttribute('href') === '#' + cur;
+    a.classList.toggle('on', on);
+    if (on) a.scrollIntoView({ block: 'nearest', inline: 'center' });
+  });
+}, { passive: true });
+
+drawMenu(); drawBar();
+</script>
+</body>
+</html>
